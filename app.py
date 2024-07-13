@@ -55,9 +55,11 @@ class FormContainer(ft.UserControl):
 # Class to create new task by user
 class CreateTask(ft.UserControl):
     """ Class to create new task by user """
-    def __init__(self, task: str, date: str):
+    def __init__(self, task: str, date: str, func1, func2):
         self.task = task
         self.date = date
+        self.func1 = func1
+        self.func2 = func2
         super().__init__()
         
     def task_delete_edit(self, name: str, color: str):
@@ -67,9 +69,11 @@ class CreateTask(ft.UserControl):
             icon_color=color,
             opacity=0,
             animate_opacity=200,
-            on_click=None,
+            on_click=lambda e: func(self.create_container_instance(e)),
         )
-        
+    
+    def create_container_instance(self):
+        return self # return self.create_container   
         
     def hover_show_icon(self, e):
         """ Show icon while hovering over task """
@@ -146,7 +150,12 @@ def main(page: ft.Page):
             # hide form container after submit
             create_to_do_task(e)
 
-    # Create function show/hide
+    def delete_function(e):
+        pass
+    
+    def update_function(e):
+        pass
+    
     def create_to_do_task(e):
         """ Create new task """
         if form.height != 200:
